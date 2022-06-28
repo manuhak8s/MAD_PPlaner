@@ -1,4 +1,4 @@
-package com.manuha.mobile_pplaner
+package com.manuha.mobile_pplaner.feature.main.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,18 +18,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             Mobile_PPlanerTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("User")
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+                    MainScreen()
                 }
             }
         }
     }
 }
 
-@Composable
+/*@Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
@@ -38,6 +35,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     Mobile_PPlanerTheme {
-        Greeting("Android")
+        Greeting("bla")
     }
-}
+}*/
