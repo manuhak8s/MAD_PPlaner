@@ -1,42 +1,51 @@
 package com.manuha.mobile_pplaner.feature.home.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-//import com.manuha.mobile_pplaner.feature.main.navigation.NavRoutes
+import com.manuha.mobile_pplaner.domain.model.HomeItems
 
 @Composable
 fun HomeScreen() {
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Home")
+    Column(modifier = Modifier.fillMaxSize()) {
+        listOf(
+            HomeItems.Projects,
+            HomeItems.Issues,
+            HomeItems.Help
+        ).forEach { homeItem ->
+            Row {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(15.dp)
+                        .clickable { },
+                    elevation = 10.dp
+                ) {
+                    Column (
+                        modifier = Modifier.padding(15.dp)
+                    ) {
+                        Text (
+                            homeItem.title,
+                            fontWeight = FontWeight.W900,
+                            color = Color(0xFF4552B8)
+                        )
+                        Text(homeItem.text)
+                        Icon(homeItem.icon, homeItem.iconDescription)
+                    }
+                }
+            }
+        }
     }
 }
 
+@Preview
 @Composable
-fun CustomTextField(
-    title: String,
-    textState: String,
-    onTextChange: (String) -> Unit,
-) {
-    OutlinedTextField(
-        value = textState,
-        onValueChange = { onTextChange(it) },
-        singleLine = true,
-        label = { Text(title)},
-        modifier = Modifier.padding(10.dp),
-        textStyle = TextStyle(fontWeight = FontWeight.Bold,
-            fontSize = 30.sp)
-    )
+private fun HomeScreen_Preview() {
+    HomeScreen()
 }
