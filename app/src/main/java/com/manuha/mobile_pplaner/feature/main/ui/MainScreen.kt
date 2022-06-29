@@ -7,11 +7,14 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.manuha.mobile_pplaner.feature.main.navigation.MainNav
+import com.manuha.mobile_pplaner.feature.main.navigation.MainNavigationGraph
 
 @Composable
 fun MainScreen() {
@@ -24,20 +27,19 @@ private fun MainScreenUI() {
 
     Scaffold(
         topBar = {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+            
             TopAppBar(
                 title = {
-                    Text("Hello world!")
+                    Text("Hello from PPLaner!")
                 },
-                actions = {
-                    MainNav(navController)
-                }
             )
         },
+        bottomBar = { MainNav(navController = navController)}
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            Card {
-                Text("Moini")
-            }
+            MainNavigationGraph(navController = navController)
         }
     }
 }
