@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.manuha.mobile_pplaner.feature.issue.ui.HelpScreen
 import com.manuha.mobile_pplaner.ui.theme.Mobile_PPlanerTheme
 
 class MainActivity : ComponentActivity() {
