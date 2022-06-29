@@ -61,7 +61,6 @@ fun ProjectScreen() {
                     project.issues.forEach { issue ->
                         Text("- " + issue.title)
                     }
-                    Text("- " + "item")
 
                     Text("Termination: " + project.termination.toString())
 
