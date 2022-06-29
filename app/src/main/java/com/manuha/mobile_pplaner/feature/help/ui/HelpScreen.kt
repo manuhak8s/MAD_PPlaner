@@ -2,6 +2,8 @@ package com.manuha.mobile_pplaner.feature.help.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,7 +14,7 @@ import com.manuha.mobile_pplaner.domain.model.HelpItems
 
 @Composable
 fun HelpScreen() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),) {
         listOf(
             HelpItems.Info,
             HelpItems.HowToProjects,
