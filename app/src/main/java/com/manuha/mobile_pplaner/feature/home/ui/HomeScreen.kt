@@ -2,6 +2,8 @@ package com.manuha.mobile_pplaner.feature.home.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -13,7 +15,7 @@ import com.manuha.mobile_pplaner.domain.model.HomeItems
 
 @Composable
 fun HomeScreen() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),) {
         listOf(
             HomeItems.Projects,
             HomeItems.Issues,
