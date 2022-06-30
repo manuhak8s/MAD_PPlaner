@@ -29,17 +29,54 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.manuha.mobile_pplaner.data.IssueRepository
+import com.manuha.mobile_pplaner.domain.CreateIssueUseCase
+import com.manuha.mobile_pplaner.domain.DeleteIssueUseCase
 import com.manuha.mobile_pplaner.domain.GetIssuesUseCase
 import com.manuha.mobile_pplaner.domain.model.Issue
 import com.manuha.mobile_pplaner.domain.model.demoIssues
 import com.manuha.mobile_pplaner.domain.model.demoProjects
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
+
+var creationId =  (0..9999999).random()
+var creationTitle = ""
+var creationDescription = ""
+var creationLevel = 0
+var creationProjectId = ""
+var creationCreated = ZonedDateTime.now()
+var creationUpdated = ZonedDateTime.now()
+var creationDeleted = ZonedDateTime.now()
+var creationTermination = ""
+
+var updatingId =  0
+var updatingTitle = ""
+var updatingDescription = ""
+var updatingLevel = 0
+var updatingProjectId = ""
+var updatingCreated = ZonedDateTime.now()
+var updatingUpdated = ZonedDateTime.now()
+var updatingDeleted = ZonedDateTime.now()
+var updatingTermination = ""
+
 
 @Composable
 fun IssueScreen() {
     //val issues = demoIssues
     val issues = GetIssuesUseCase().allIssues()
     val openCreateWindow = remember { mutableStateOf(false)  }
+    val openUpdateWindow = remember { mutableStateOf(false)  }
+    var issueUpdate = Issue (
+        id = updatingId,
+        title = updatingTitle,
+        description = updatingDescription,
+        level = updatingLevel,
+        projectId =  updatingProjectId,
+        created = updatingCreated,
+        updated = updatingUpdated,
+        deleted =  updatingDeleted ,
+        termination = updatingTermination
+    )
 
     Column(
         modifier = Modifier
@@ -74,11 +111,24 @@ fun IssueScreen() {
 
                     Text(issue.description)
 
-                    Text("Termination: " + issue.termination.toString())
+                    Text("Termination: " + issue.termination)
 
                     Row {
                         OutlinedButton(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                openUpdateWindow.value = true
+                                val issueUpdate = Issue(
+                                    id = issue.id,
+                                    title = issue.title,
+                                    description = issue.description,
+                                    level = issue.level,
+                                    projectId = issue.projectId,
+                                    created = issue.created,
+                                    updated = issue.updated,
+                                    deleted = issue.deleted,
+                                    termination = issue.termination
+                                )
+                            },
                             border = BorderStroke(1.dp, Color.DarkGray),
                             shape = CircleShape,
                             colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.DarkGray),
@@ -88,7 +138,7 @@ fun IssueScreen() {
 
                         OutlinedButton(
                             onClick = {
-
+                                DeleteIssueUseCase().deleteIssue(issue.id)
                             },
                             border = BorderStroke(1.dp, Color.Red),
                             shape = CircleShape,
@@ -112,6 +162,7 @@ fun IssueScreen() {
             Icon(Icons.Filled.Add, "AddBtn")
         }
 
+        // create dialog
         Column {
 
             if (openCreateWindow.value) {
@@ -137,17 +188,19 @@ fun IssueScreen() {
                                     label = { Text("Title") },
                                     modifier = Modifier.padding(3.dp)
                                 )
+                                creationTitle = titleState.value.text
                             }
                             Row() {
-                                val titleState = remember { mutableStateOf(TextFieldValue()) }
+                                val descriptionState = remember { mutableStateOf(TextFieldValue()) }
                                 OutlinedTextField(
-                                    value = titleState.value,
-                                    onValueChange = {titleState.value = it},
+                                    value = descriptionState.value,
+                                    onValueChange = {descriptionState.value = it},
                                     label = { Text("Description") },
                                     modifier = Modifier
                                         .padding(3.dp)
                                         .height(200.dp)
                                 )
+                                creationDescription = descriptionState.value.text
                             }
                             Row() {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(end = 20.dp)) {
@@ -168,8 +221,108 @@ fun IssueScreen() {
                         Button(
                             onClick = {
                                 openCreateWindow.value = false
+                                val issueCreate = Issue(
+                                    id = creationId,
+                                    title = creationTitle,
+                                    description = creationDescription,
+                                    level = creationLevel,
+                                    projectId = creationProjectId,
+                                    created = creationCreated,
+                                    updated = creationUpdated,
+                                    deleted = creationDeleted,
+                                    termination = creationTermination
+                                )
+                                CreateIssueUseCase().createIssue(issueCreate)
                             }) {
                             Text("create")
+                        }
+                    },
+                    dismissButton = {
+                        Button(
+
+                            onClick = {
+                                openCreateWindow.value = false
+                            }) {
+                            Text("decline")
+                        }
+                    }
+                )
+            }
+        }
+
+        // update dialog
+        Column {
+
+            if (openUpdateWindow.value) {
+
+                AlertDialog(
+                    modifier = Modifier.fillMaxHeight(),
+                    onDismissRequest = {
+                        // Dismiss the dialog when the user clicks outside the dialog or on the back
+                        // button. If you want to disable that functionality, simply use an empty
+                        // onCloseRequest.
+                        openCreateWindow.value = false
+                    },
+                    title = {
+                        Text(text = "Update Issue")
+                    },
+                    text = {
+                        Column() {
+                            Row() {
+                                val titleState = remember { mutableStateOf(TextFieldValue()) }
+                                OutlinedTextField(
+                                    value =  titleState.value,
+                                    onValueChange = {titleState.value = titleState.value},
+                                    label = { Text("Title") },
+                                    modifier = Modifier.padding(3.dp),
+                                )
+                                creationTitle = titleState.value.text
+                            }
+                            Row() {
+                                val descriptionState = remember { mutableStateOf(TextFieldValue()) }
+                                OutlinedTextField(
+                                    value = descriptionState.value,
+                                    onValueChange = {descriptionState.value = it},
+                                    label = { Text("Description") },
+                                    modifier = Modifier
+                                        .padding(3.dp)
+                                        .height(200.dp)
+                                )
+                                creationDescription = descriptionState.value.text
+                            }
+                            Row() {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(end = 20.dp)) {
+                                    TriggerDatePicker()
+                                }
+                            }
+                            Row() {
+                                Column(Modifier.padding(horizontal = 25.dp)) {
+                                    showSelectLevelDropDown()
+                                }
+                                Column (){
+                                    showSelectProjectDropDown()
+                                }
+                            }
+                        }
+                    },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                openCreateWindow.value = false
+                                val issue = Issue(
+                                    id = creationId,
+                                    title = creationTitle,
+                                    description = creationDescription,
+                                    level = creationLevel,
+                                    projectId = creationProjectId,
+                                    created = creationCreated,
+                                    updated = creationUpdated,
+                                    deleted = creationDeleted,
+                                    termination = creationTermination
+                                )
+                                CreateIssueUseCase().createIssue(issue)
+                            }) {
+                            Text("update")
                         }
                     },
                     dismissButton = {
@@ -238,6 +391,7 @@ fun showSelectProjectDropDown() {
 
             Row(Modifier) {
                 Text(text = selectedOption, textAlign = TextAlign.Start)
+                creationProjectId = selectedOption
             }
         }
     }
@@ -279,9 +433,24 @@ fun showSelectLevelDropDown() {
 
         Row(Modifier) {
             Text(text = selectedOption, textAlign = TextAlign.Start)
+            creationLevel = calcIntLevel(selectedOption)
         }
 
     }
+}
+
+fun calcIntLevel(level: String): Int {
+    if (level=="easy") {
+        return 1
+    }
+    if (level=="medium") {
+        return 2
+    }
+    if (level=="hard") {
+        return 3
+    }
+
+    return 0
 }
 
 @Composable
@@ -321,5 +490,8 @@ fun TriggerDatePicker() {
 
         // Displaying the mDate value in the Text
         Text(text = "${date.value}", textAlign = TextAlign.Start)
+        /*var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a z");
+        var parsedDate = ZonedDateTime.parse(date.value, formatter)*/
+        creationTermination = date.value
     }
 }

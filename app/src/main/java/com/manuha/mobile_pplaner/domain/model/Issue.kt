@@ -7,9 +7,9 @@ data class Issue (
     val title: String,
     val description: String,
     val level: Int,
-    val projectId: Int,
+    val projectId: String,
     val created: ZonedDateTime,
     val updated: ZonedDateTime,
     val deleted: ZonedDateTime,
-    val termination: ZonedDateTime
+    val termination: String
 )

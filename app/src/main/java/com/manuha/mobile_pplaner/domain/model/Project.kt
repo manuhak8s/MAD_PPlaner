@@ -22,8 +22,8 @@ val demoIssues: List<Issue> = listOf(
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = ZonedDateTime.now(),
-        projectId = 2
+        termination = "23.01.2023",
+        projectId = "project-1"
     ),
     Issue(
         id = 2,
@@ -33,8 +33,8 @@ val demoIssues: List<Issue> = listOf(
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = ZonedDateTime.now(),
-        projectId = 1
+        termination = "23.01.2023",
+        projectId = "project-1"
     ),
     Issue(
         id = 3,
@@ -44,8 +44,8 @@ val demoIssues: List<Issue> = listOf(
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = ZonedDateTime.now(),
-        projectId = 1
+        termination = "23.01.2023",
+        projectId = "project-1"
     )
 )
 val demoProjects = listOf(
