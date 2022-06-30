@@ -10,42 +10,53 @@ data class Project (
     val created: ZonedDateTime,
     val updated: ZonedDateTime,
     val deleted: ZonedDateTime,
-    val termination: ZonedDateTime
+    val termination: String
 )
 
 val demoIssues: List<Issue> = listOf(
     Issue(
         id = 1,
-        title = "test issue 1",
-        description = "bla bla",
+        title = "Project Structure Initialization",
+        description = "For further actions the mobile app development project has to be set up based on an Android Studio project.",
         level = 1,
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = "23.01.2023",
-        projectId = "project-1"
+        termination = "30.09.2022",
+        projectId = "Mobile App Development"
     ),
     Issue(
         id = 2,
-        title = "test issue 2",
-        description = "bla bla bla bla",
+        title = "Data Base Binding",
+        description = "Android Room has to be configured and implemented for saving data persistent.",
         level = 3,
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = "23.01.2023",
-        projectId = "project-1"
+        termination = "22.10.2022",
+        projectId = "Mobile App Development"
     ),
     Issue(
         id = 3,
-        title = "test issue 3",
-        description = "bla bla bla bla",
+        title = "Implement CI/CD Tekton Pipeline",
+        description = "The Kubernetes env needs a continous integration of all Bitbucket repositories.",
         level = 2,
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = "23.01.2023",
-        projectId = "project-1"
+        termination = "09.09.2022",
+        projectId = "Kubernetes Platform Engineering"
+    ),
+    Issue(
+        id = 4,
+        title = "API Server",
+        description = "Our central service needs APIs for handling incoming requests of the clients.",
+        level = 1,
+        created = ZonedDateTime.now(),
+        updated = ZonedDateTime.now(),
+        deleted = ZonedDateTime.now(),
+        termination = "20.12.2022",
+        projectId = "Central Service App"
     )
 )
 val demoProjects = listOf(
@@ -58,7 +69,7 @@ val demoProjects = listOf(
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = ZonedDateTime.now()
+        termination = "23.01.2023"
     ),
     Project(
         id = 2,
@@ -68,6 +79,6 @@ val demoProjects = listOf(
         created = ZonedDateTime.now(),
         updated = ZonedDateTime.now(),
         deleted = ZonedDateTime.now(),
-        termination = ZonedDateTime.now()
+        termination = "23.01.2023"
     )
 )

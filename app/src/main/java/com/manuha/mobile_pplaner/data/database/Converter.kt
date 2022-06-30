@@ -1,6 +1,9 @@
 package com.manuha.mobile_pplaner.data.database
 
 import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.manuha.mobile_pplaner.domain.model.Issue
 import java.time.ZonedDateTime
 
 /** Type converters to map between SQLite types and entity types. */
@@ -17,5 +20,19 @@ object Converters {
         return timestamp?.let {
             ZonedDateTime.parse(it)
         }
+    }
+
+    @TypeConverter
+    fun IssuesListToDb(issues: List<Issue>): String? {
+        val gson = Gson()
+        val type = object: TypeToken<List<Issue>>() {}.type
+        return gson.toJson(issues, type)
+    }
+
+    @TypeConverter
+    fun IssuesListFromDb(value: String): List<Issue> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Issue>>() {}.type
+        return gson.fromJson(value, type)
     }
 }

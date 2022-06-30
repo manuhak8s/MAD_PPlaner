@@ -32,6 +32,7 @@ import com.manuha.mobile_pplaner.data.IssueRepository
 import com.manuha.mobile_pplaner.domain.CreateIssueUseCase
 import com.manuha.mobile_pplaner.domain.DeleteIssueUseCase
 import com.manuha.mobile_pplaner.domain.GetIssuesUseCase
+import com.manuha.mobile_pplaner.domain.GetProjectsUseCase
 import com.manuha.mobile_pplaner.domain.model.Issue
 import com.manuha.mobile_pplaner.domain.model.demoIssues
 import com.manuha.mobile_pplaner.domain.model.demoProjects
@@ -66,6 +67,7 @@ fun IssueScreen() {
     val issues = GetIssuesUseCase().allIssues()
     val openCreateWindow = remember { mutableStateOf(false)  }
     val openUpdateWindow = remember { mutableStateOf(false)  }
+    val context = LocalContext.current
     var issueUpdate = Issue (
         id = updatingId,
         title = updatingTitle,
@@ -139,6 +141,7 @@ fun IssueScreen() {
                         OutlinedButton(
                             onClick = {
                                 DeleteIssueUseCase().deleteIssue(issue.id)
+                                Toast.makeText(context, "${issue.title} deleted",Toast.LENGTH_SHORT).show()
                             },
                             border = BorderStroke(1.dp, Color.Red),
                             shape = CircleShape,
@@ -233,6 +236,7 @@ fun IssueScreen() {
                                     termination = creationTermination
                                 )
                                 CreateIssueUseCase().createIssue(issueCreate)
+                                Toast.makeText(context, "$creationTitle created",Toast.LENGTH_SHORT).show()
                             }) {
                             Text("create")
                         }
@@ -308,8 +312,8 @@ fun IssueScreen() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                openCreateWindow.value = false
-                                val issue = Issue(
+                                openUpdateWindow.value = false
+                                /*val issue = Issue(
                                     id = creationId,
                                     title = creationTitle,
                                     description = creationDescription,
@@ -320,16 +324,15 @@ fun IssueScreen() {
                                     deleted = creationDeleted,
                                     termination = creationTermination
                                 )
-                                CreateIssueUseCase().createIssue(issue)
+                                CreateIssueUseCase().createIssue(issue)*/
                             }) {
                             Text("update")
                         }
                     },
                     dismissButton = {
                         Button(
-
                             onClick = {
-                                openCreateWindow.value = false
+                                openUpdateWindow.value = false
                             }) {
                             Text("decline")
                         }
@@ -358,7 +361,8 @@ fun calcIssueCardColor(level: Int): Color {
 fun showSelectProjectDropDown() {
     var expanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    var selectedOption by remember { mutableStateOf(demoProjects[0].title) }
+    var projects = GetProjectsUseCase().allProjects()
+    var selectedOption by remember { mutableStateOf(projects[0].title) }
 
     Column() {
         Box(modifier = Modifier
@@ -377,7 +381,7 @@ fun showSelectProjectDropDown() {
                     expanded = expanded,
                     onDismissRequest = { expanded = false }
                 ) {
-                    demoProjects.forEach { project ->
+                    projects.forEach { project ->
                         DropdownMenuItem(onClick = {
                             Toast.makeText(context,project.title + " selected",Toast.LENGTH_SHORT).show()
                             selectedOption = project.title
