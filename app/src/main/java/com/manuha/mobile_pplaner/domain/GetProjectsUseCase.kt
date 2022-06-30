@@ -5,9 +5,8 @@ import com.manuha.mobile_pplaner.data.projectRepo
 import com.manuha.mobile_pplaner.domain.model.Issue
 import com.manuha.mobile_pplaner.domain.model.Project
 
-class CreateProjectUseCase {
-    fun createProject (project: Project): Boolean{
-        projectRepo.addProject(project)
-        return true
+class GetProjectsUseCase {
+    fun allProjects (): List<Project>{
+        return projectRepo.getAllProjects()
     }
 }

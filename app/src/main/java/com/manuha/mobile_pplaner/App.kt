@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import com.manuha.mobile_pplaner.data.database.AppDatabase
 import com.manuha.mobile_pplaner.data.issueRepo
+import com.manuha.mobile_pplaner.data.projectRepo
 import com.manuha.mobile_pplaner.domain.AddDemoIssuesUseCase
+import com.manuha.mobile_pplaner.domain.AddDemoProjectsUseCase
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -33,6 +35,7 @@ class App : Application() {
 
         runBlocking {
             AddDemoIssuesUseCase(issueRepo)()
+            AddDemoProjectsUseCase(projectRepo)()
         }
     }
 
