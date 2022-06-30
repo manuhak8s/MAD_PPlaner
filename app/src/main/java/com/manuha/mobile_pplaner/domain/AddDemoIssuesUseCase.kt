@@ -19,8 +19,8 @@ class AddDemoIssuesUseCase (private val issueRepository: IssueRepository){
                 created = ZonedDateTime.now(),
                 updated = ZonedDateTime.now(),
                 deleted = ZonedDateTime.now(),
-                termination = ZonedDateTime.now(),
-                projectId = 2
+                termination = "23.01.2023",
+                projectId = "project-1"
             ),
             Issue(
                 id = 2,
@@ -30,8 +30,8 @@ class AddDemoIssuesUseCase (private val issueRepository: IssueRepository){
                 created = ZonedDateTime.now(),
                 updated = ZonedDateTime.now(),
                 deleted = ZonedDateTime.now(),
-                termination = ZonedDateTime.now(),
-                projectId = 1
+                termination = "23.01.2023",
+                projectId = "project-2"
             ),
             Issue(
                 id = 3,
@@ -41,8 +41,8 @@ class AddDemoIssuesUseCase (private val issueRepository: IssueRepository){
                 created = ZonedDateTime.now(),
                 updated = ZonedDateTime.now(),
                 deleted = ZonedDateTime.now(),
-                termination = ZonedDateTime.now(),
-                projectId = 1
+                termination = "23.01.2023",
+                projectId = "project-1"
             )
         ).forEach {
             issueRepository.addIssue(it)

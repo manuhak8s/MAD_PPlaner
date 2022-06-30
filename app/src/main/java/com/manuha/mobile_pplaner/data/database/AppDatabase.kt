@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    version = 1,
+    version = 4,
     entities = [
         IssueDb::class,
     ]
