@@ -28,13 +28,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.manuha.mobile_pplaner.data.IssueRepository
+import com.manuha.mobile_pplaner.domain.GetIssuesUseCase
+import com.manuha.mobile_pplaner.domain.model.Issue
 import com.manuha.mobile_pplaner.domain.model.demoIssues
 import com.manuha.mobile_pplaner.domain.model.demoProjects
 import java.util.*
 
 @Composable
 fun IssueScreen() {
-    val issues = demoIssues
+    //val issues = demoIssues
+    val issues = GetIssuesUseCase().allIssues()
     val openCreateWindow = remember { mutableStateOf(false)  }
 
     Column(
