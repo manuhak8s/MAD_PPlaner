@@ -224,6 +224,7 @@ fun showSelectProjectDropDown() {
                         DropdownMenuItem(onClick = {
                             Toast.makeText(context,project.title + " selected",Toast.LENGTH_SHORT).show()
                             selectedOption = project.title
+                            expanded = false
                         }) {
                             Text(project.title)
                         }
@@ -264,6 +265,7 @@ fun showSelectLevelDropDown() {
                 DropdownMenuItem(onClick = {
                     Toast.makeText(context, "level $level selected",Toast.LENGTH_SHORT).show()
                     selectedOption = level
+                    expanded = false
                 }) {
                     Text(level)
                 }
