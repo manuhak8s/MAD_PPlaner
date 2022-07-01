@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 
+/** Interface for executing project db operations */
 @Dao
 interface ProjectDao {
     @Insert

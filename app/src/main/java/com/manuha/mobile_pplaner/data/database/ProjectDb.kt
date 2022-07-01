@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 import com.manuha.mobile_pplaner.domain.model.Issue
 import java.time.ZonedDateTime
 
+/** Project db representation for saving them persistent */
 @Entity(tableName = "project")
 data class ProjectDb(
     @PrimaryKey

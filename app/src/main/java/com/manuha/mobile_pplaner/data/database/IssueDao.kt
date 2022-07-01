@@ -1,8 +1,8 @@
 package com.manuha.mobile_pplaner.data.database
 
 import androidx.room.*
-import com.manuha.mobile_pplaner.domain.model.Issue
 
+/** Interface for executing issue db operations */
 @Dao
 interface IssueDao {
     @Insert
