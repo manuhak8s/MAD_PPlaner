@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.manuha.mobile_pplaner.domain.model.HomeItems
 
+/** home ui */
 @Composable
 fun HomeScreen() {
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),) {

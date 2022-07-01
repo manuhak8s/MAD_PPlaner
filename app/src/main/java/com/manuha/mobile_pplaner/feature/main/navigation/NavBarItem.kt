@@ -1,12 +1,6 @@
 package com.manuha.mobile_pplaner.feature.main.navigation
 
-import android.graphics.drawable.Icon
-import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.runtime.Composable
-import com.manuha.mobile_pplaner.R
-
+/** navbar items and their fields (some are not implemented yet) */
 sealed class NavBarItem {
     abstract val routeName: String
     //abstract val title: Int

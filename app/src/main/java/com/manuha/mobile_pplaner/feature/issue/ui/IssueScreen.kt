@@ -17,29 +17,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.manuha.mobile_pplaner.data.IssueRepository
 import com.manuha.mobile_pplaner.domain.CreateIssueUseCase
 import com.manuha.mobile_pplaner.domain.DeleteIssueUseCase
 import com.manuha.mobile_pplaner.domain.GetIssuesUseCase
 import com.manuha.mobile_pplaner.domain.GetProjectsUseCase
 import com.manuha.mobile_pplaner.domain.model.Issue
-import com.manuha.mobile_pplaner.domain.model.demoIssues
-import com.manuha.mobile_pplaner.domain.model.demoProjects
 import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
+/** creation helper vars */
 var creationId =  (0..9999999).random()
 var creationTitle = ""
 var creationDescription = ""
@@ -50,6 +41,7 @@ var creationUpdated = ZonedDateTime.now()
 var creationDeleted = ZonedDateTime.now()
 var creationTermination = ""
 
+/** update helper vars */
 var updatingId =  0
 var updatingTitle = ""
 var updatingDescription = ""
@@ -60,7 +52,7 @@ var updatingUpdated = ZonedDateTime.now()
 var updatingDeleted = ZonedDateTime.now()
 var updatingTermination = ""
 
-
+/** issue ui */
 @Composable
 fun IssueScreen() {
     //val issues = demoIssues
@@ -68,6 +60,8 @@ fun IssueScreen() {
     val openCreateWindow = remember { mutableStateOf(false)  }
     val openUpdateWindow = remember { mutableStateOf(false)  }
     val context = LocalContext.current
+
+    /** update instance (beta - not used) */
     var issueUpdate = Issue (
         id = updatingId,
         title = updatingTitle,
@@ -116,6 +110,7 @@ fun IssueScreen() {
                     Text("Termination: " + issue.termination)
 
                     Row {
+                        /** edit issue button */
                         OutlinedButton(
                             onClick = {
                                 openUpdateWindow.value = true
@@ -137,7 +132,7 @@ fun IssueScreen() {
                         ) {
                             Icon(Icons.Filled.Edit, "EditBtn")
                         }
-
+                        /** delete issue button */
                         OutlinedButton(
                             onClick = {
                                 DeleteIssueUseCase().deleteIssue(issue.id)
@@ -154,6 +149,7 @@ fun IssueScreen() {
             }
         }
 
+        /** create issue button */
         OutlinedButton(
             onClick = {
                 openCreateWindow.value = true
@@ -165,7 +161,7 @@ fun IssueScreen() {
             Icon(Icons.Filled.Add, "AddBtn")
         }
 
-        // create dialog
+        /** create issue dialog window */
         Column {
 
             if (openCreateWindow.value) {
@@ -254,7 +250,7 @@ fun IssueScreen() {
             }
         }
 
-        // update dialog
+        /** update issue dialog window */
         Column {
 
             if (openUpdateWindow.value) {
@@ -343,6 +339,7 @@ fun IssueScreen() {
     }
 }
 
+/** calcIssueCardColor calculates the color of an issue card by its level */
 fun calcIssueCardColor(level: Int): Color {
     if (level == 1) {
         return Color(0xFF468b00)
@@ -357,6 +354,7 @@ fun calcIssueCardColor(level: Int): Color {
     return Color.White
 }
 
+/** showSelectProjectDropDown displays a drop down menu */
 @Composable
 fun showSelectProjectDropDown() {
     var expanded by remember { mutableStateOf(false) }
@@ -401,6 +399,7 @@ fun showSelectProjectDropDown() {
     }
 }
 
+/** showSelectLevelDropDown displays a drop down menu */
 @Composable
 fun showSelectLevelDropDown() {
     var expanded by remember { mutableStateOf(false) }
@@ -443,6 +442,7 @@ fun showSelectLevelDropDown() {
     }
 }
 
+/** calcIntLevel calculates the number value of a level */
 fun calcIntLevel(level: String): Int {
     if (level=="easy") {
         return 1
@@ -457,6 +457,7 @@ fun calcIntLevel(level: String): Int {
     return 0
 }
 
+/** TriggerDatePicker displays a calendar for selecting a date */
 @Composable
 fun TriggerDatePicker() {
     val context = LocalContext.current
@@ -480,22 +481,14 @@ fun TriggerDatePicker() {
     )
 
     Column() {
-
-        // Creating a button that on
-        // click displays/shows the DatePickerDialog
         Button(onClick = {
             datePickerDialog.show()
         }, colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF0F9D58)) ) {
             Text(text = "Termination", color = Color.Black)
         }
 
-        // Adding a space of 100dp height
         Spacer(modifier = Modifier.size(10.dp))
-
-        // Displaying the mDate value in the Text
         Text(text = "${date.value}", textAlign = TextAlign.Start)
-        /*var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a z");
-        var parsedDate = ZonedDateTime.parse(date.value, formatter)*/
         creationTermination = date.value
     }
 }

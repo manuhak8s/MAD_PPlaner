@@ -9,8 +9,8 @@ import com.manuha.mobile_pplaner.feature.help.ui.HelpScreen
 import com.manuha.mobile_pplaner.feature.issue.ui.IssueScreen
 import com.manuha.mobile_pplaner.feature.issue.ui.ProjectScreen
 import com.manuha.mobile_pplaner.feature.login.ui.LoginScreen
-import com.manuha.mobile_pplaner.feature.main.ui.MainScreen
 
+/** host for displaying the matching screen by navigating */
 @Composable
 fun MainNavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = NavBarItem.Home.routeName) {

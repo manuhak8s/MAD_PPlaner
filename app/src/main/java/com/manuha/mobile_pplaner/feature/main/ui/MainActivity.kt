@@ -13,12 +13,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.manuha.mobile_pplaner.feature.help.ui.HelpScreen
 import com.manuha.mobile_pplaner.ui.theme.Mobile_PPlanerTheme
 
+/** main activity */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Mobile_PPlanerTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     MainScreen()
                 }
