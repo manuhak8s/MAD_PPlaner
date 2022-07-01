@@ -2,6 +2,7 @@ package com.manuha.mobile_pplaner.domain.model
 
 import java.time.ZonedDateTime
 
+/** domain model representing an issue */
 data class Issue (
     val id: Int,
     val title: String,

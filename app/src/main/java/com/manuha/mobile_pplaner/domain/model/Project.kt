@@ -2,6 +2,7 @@ package com.manuha.mobile_pplaner.domain.model
 
 import java.time.ZonedDateTime
 
+/** domain model representing a project */
 data class Project (
     val id: Int,
     val title: String,
@@ -13,6 +14,7 @@ data class Project (
     val termination: String
 )
 
+/** demo data for testing */
 val demoIssues: List<Issue> = listOf(
     Issue(
         id = 1,

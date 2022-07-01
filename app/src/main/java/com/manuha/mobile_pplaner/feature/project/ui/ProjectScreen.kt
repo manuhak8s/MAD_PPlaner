@@ -19,22 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.manuha.mobile_pplaner.domain.*
-import com.manuha.mobile_pplaner.domain.model.Issue
 import com.manuha.mobile_pplaner.domain.model.Project
 import com.manuha.mobile_pplaner.domain.model.demoIssues
-import com.manuha.mobile_pplaner.domain.model.demoProjects
 
+/** project ui */
 @Composable
 fun ProjectScreen() {
-    //val projects = demoProjects
     val projects = GetProjectsUseCase().allProjects()
     val openCreateWindow = remember { mutableStateOf(false)  }
     val openUpdateWindow = remember { mutableStateOf(false)  }
@@ -77,6 +71,7 @@ fun ProjectScreen() {
 
                     Text("Termination: " + project.termination.toString())
 
+                    /** edit project button */
                     Row {
                         OutlinedButton(
                             onClick = {
@@ -89,6 +84,7 @@ fun ProjectScreen() {
                             Icon(Icons.Filled.Edit, "EditBtn")
                         }
 
+                        /** delete project button */
                         OutlinedButton(
                             onClick = {
                                 DeleteProjectUseCase().deleteProject(project.id)
@@ -105,6 +101,7 @@ fun ProjectScreen() {
             }
         }
 
+        /** create project button */
         OutlinedButton(
             onClick = {
                 openCreateWindow.value = true
@@ -116,7 +113,7 @@ fun ProjectScreen() {
             Icon(Icons.Filled.Add, "AddBtn")
         }
 
-        // create dialog
+        /** create project dialog window */
         Column {
 
             if (openCreateWindow.value) {
@@ -201,6 +198,7 @@ fun ProjectScreen() {
     }
 }
 
+/** showSelectIssuesDropDown displays a drop down menu */
 @Composable
 fun showSelectIssuesDropDown() {
     var expanded by remember { mutableStateOf(false) }

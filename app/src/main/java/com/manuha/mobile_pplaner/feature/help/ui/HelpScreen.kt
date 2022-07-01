@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.manuha.mobile_pplaner.domain.model.HelpItems
 
+/** help ui */
 @Composable
 fun HelpScreen() {
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),) {

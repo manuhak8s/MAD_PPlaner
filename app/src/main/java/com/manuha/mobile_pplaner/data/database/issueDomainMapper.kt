@@ -2,6 +2,7 @@ package com.manuha.mobile_pplaner.data.database
 
 import com.manuha.mobile_pplaner.domain.model.Issue
 
+/** maps a domain model issue to a db issue */
 fun issueToDb(issue:Issue): IssueDb = IssueDb(
     id = issue.id,
     title = issue.title,
@@ -14,6 +15,7 @@ fun issueToDb(issue:Issue): IssueDb = IssueDb(
     termination = issue.termination
 )
 
+/** maps db issue to a domain model issue */
 fun issueFromDb(issue: IssueDb): Issue? {
     return Issue(
         id = issue.id,

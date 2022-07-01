@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
+/** use case for adding issue demo data to db at first time use of app */
 class AddDemoIssuesUseCase (private val issueRepository: IssueRepository){
     suspend operator fun invoke() = withContext(Dispatchers.Default) {
         if (issueRepository.getAllIssues().isNotEmpty()) return@withContext

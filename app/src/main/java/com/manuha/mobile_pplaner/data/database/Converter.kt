@@ -22,6 +22,7 @@ object Converters {
         }
     }
 
+    /** Converts a list of issues to a valid db field item as String*/
     @TypeConverter
     fun IssuesListToDb(issues: List<Issue>): String? {
         val gson = Gson()
@@ -29,6 +30,7 @@ object Converters {
         return gson.toJson(issues, type)
     }
 
+    /** Converts a String db field to a vald Issue list*/
     @TypeConverter
     fun IssuesListFromDb(value: String): List<Issue> {
         val gson = Gson()

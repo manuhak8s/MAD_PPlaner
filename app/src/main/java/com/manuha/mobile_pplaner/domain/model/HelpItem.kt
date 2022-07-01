@@ -1,11 +1,6 @@
 package com.manuha.mobile_pplaner.domain.model
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.ui.graphics.vector.ImageVector
-
+/** static content items for help ui */
 sealed class HelpItems {
     abstract val id: Int
     abstract val title: String

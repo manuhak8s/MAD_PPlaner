@@ -24,15 +24,6 @@ class App : Application() {
             }
             .allowMainThreadQueries().build()
 
-        /*
-         In a real app we should never use runBlocking {}. Especially not on app start up.
-         However, we would need to refactor the ProductsRepository to use Flow. Therefore, we accept this hack for now. After all, it is
-         just a demo app.
-         The real solution would be to launch a coroutine in the app scope:
-         private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-         scope.launch {  }
-         */
-
         runBlocking {
             AddDemoIssuesUseCase(issueRepo)()
             AddDemoProjectsUseCase(projectRepo)()

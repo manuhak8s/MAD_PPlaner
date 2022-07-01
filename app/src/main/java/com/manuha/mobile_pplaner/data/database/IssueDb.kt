@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.ZonedDateTime
 
+/** Issue db representation for saving them persistent */
 @Entity(tableName = "issue")
 data class IssueDb(
     @PrimaryKey

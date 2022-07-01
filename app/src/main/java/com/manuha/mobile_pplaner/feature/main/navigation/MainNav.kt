@@ -1,18 +1,13 @@
 package com.manuha.mobile_pplaner.feature.main.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.manuha.mobile_pplaner.feature.main.ui.MainScreen
 
+/** bottom main navigation */
 @Composable
 fun MainNav(navController: NavController) {
     BottomNavigation {
@@ -46,6 +41,7 @@ fun MainNav(navController: NavController) {
     }
 }
 
+/** CalcIcon calculates based on a route its matching icon */
 @Composable
 fun CalcIcon(routeName: String) {
     if (routeName == "home") {
