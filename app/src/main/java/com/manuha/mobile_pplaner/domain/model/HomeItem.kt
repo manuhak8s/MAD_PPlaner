@@ -1,14 +1,12 @@
 package com.manuha.mobile_pplaner.domain.model
 
-import android.graphics.drawable.Icon
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.manuha.mobile_pplaner.feature.main.navigation.NavBarItem
 
+/** static content items for home ui */
 sealed class HomeItems {
     abstract val id: Int
     abstract val title: String
@@ -41,36 +39,3 @@ sealed class HomeItems {
     }
 
 }
-
-/*
-data class HomeItem(
-    val id: Int,
-    val title: String,
-    val text: String,
-    val icon: ImageVector,
-    val iconDescription: String
-)
-
-val homeItems = listOf<HomeItem>(
-    HomeItem(
-      id = 1,
-        title = "Getting started with Projects",
-        text = "You want to manage different projects with your mobile device? Then you have to try the Mobile PPlaner project manager. Just click the following icon at the bottom bar!",
-        icon = Icons.Filled.Build,
-         iconDescription = "Projects"
-    ),
-    HomeItem(
-        id = 2,
-        title = "Getting started with Issues",
-        text = "The right way to manage a project is creating tasks named by issues. Click the following icon at the bottom bar for managing your issues with Mobile PPlaner!",
-        icon = Icons.Filled.Done,
-        iconDescription = "Issues"
-    ),
-    HomeItem(
-        id = 3,
-        title = "You need help or other instructions?",
-        text = "Then press the info icon at the bottom bar.",
-        icon = Icons.Filled.Info,
-        iconDescription = "Help"
-    ),
-)*/

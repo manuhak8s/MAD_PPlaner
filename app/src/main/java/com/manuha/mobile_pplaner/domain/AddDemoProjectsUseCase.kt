@@ -1,14 +1,13 @@
 package com.manuha.mobile_pplaner.domain
 
-import com.manuha.mobile_pplaner.data.IssueRepository
 import com.manuha.mobile_pplaner.data.ProjectRepository
-import com.manuha.mobile_pplaner.domain.model.Issue
 import com.manuha.mobile_pplaner.domain.model.Project
 import com.manuha.mobile_pplaner.domain.model.demoIssues
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.ZonedDateTime
 
+/** use case for adding issue demo data to db at first time use of app */
 class AddDemoProjectsUseCase (private val projectRepository: ProjectRepository){
     suspend operator fun invoke() = withContext(Dispatchers.Default) {
         if (projectRepository.getAllProjects().isNotEmpty()) return@withContext

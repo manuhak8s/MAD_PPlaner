@@ -1,5 +1,6 @@
 package com.manuha.mobile_pplaner.domain.model
 
+/** unused code */
 @JvmInline
 value class IssueManagerId(val value: String)
 
